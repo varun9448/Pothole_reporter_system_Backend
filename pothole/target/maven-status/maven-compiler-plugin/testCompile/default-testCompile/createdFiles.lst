@@ -1,0 +1,5 @@
+com\example\pothole\controller\PublicReportControllerTest.class
+com\example\pothole\repository\ReportRepositoryTest.class
+com\example\pothole\service\ReportServiceCreateReportTest.class
+com\example\pothole\service\ReportServicePublicNearbyTest.class
+com\example\pothole\PotholeApplicationTests.class

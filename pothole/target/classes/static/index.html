@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Report a Pothole</title>
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">City Road Care</p>
+        <h1>Report a pothole in under a minute.</h1>
+        <p class="subhead">Share a photo and location so the right team can fix it faster.</p>
+      </header>
+
+      <section class="card">
+        <form id="reportForm" class="form" enctype="multipart/form-data">
+          <label class="field">
+            <span class="label">Photos (4-5 required)</span>
+            <span class="hint">Upload 4 to 5 clear photos so the team can confirm severity properly.</span>
+            <div class="photo-actions">
+              <button id="addPhotoBtn" class="chip primary" type="button">Add photos</button>
+            </div>
+            <input id="photo" name="photo" type="file" accept="image/*" multiple hidden />
+            <span id="photoPreview" class="preview" aria-hidden="true"></span>
+          </label>
+
+          <label class="field">
+            <span class="label">Description</span>
+            <textarea
+              name="description"
+              rows="3"
+              placeholder="Example: Large pothole in the left lane near the school entrance."
+              required
+            ></textarea>
+          </label>
+
+          <div class="field">
+            <div class="label-row">
+              <span class="label">Location</span>
+              <button id="locateBtn" class="chip" type="button">Use my location</button>
+            </div>
+            <div class="row">
+              <input
+                id="latitude"
+                name="latitude"
+                type="number"
+                step="0.000001"
+                placeholder="Latitude"
+                inputmode="decimal"
+                required
+              />
+              <input
+                id="longitude"
+                name="longitude"
+                type="number"
+                step="0.000001"
+                placeholder="Longitude"
+                inputmode="decimal"
+                required
+              />
+            </div>
+          </div>
+
+          <label class="field">
+            <span class="label">Contact (optional)</span>
+            <input name="reporterContact" type="text" placeholder="Phone or email" />
+          </label>
+
+          <button class="submit" type="submit">Send report</button>
+          <p class="fineprint">We only use your contact if follow-up is needed.</p>
+          <p id="status" class="status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <div id="sheetBackdrop" class="sheet-backdrop" aria-hidden="true"></div>
+    <div id="photoSheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="photoSheetTitle">
+      <p id="photoSheetTitle" class="sheet-title">Add photos</p>
+      <div class="sheet-actions">
+        <button id="cameraBtn" class="sheet-btn" type="button">Use camera</button>
+        <button id="galleryBtn" class="sheet-btn" type="button">Choose from gallery</button>
+      </div>
+      <button id="sheetCancel" class="sheet-cancel" type="button">Cancel</button>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

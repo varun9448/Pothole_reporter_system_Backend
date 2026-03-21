@@ -1,0 +1,643 @@
+{
+  "info": {
+    "name": "Pothole Report System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "adminUser",
+      "value": "admin1"
+    },
+    {
+      "key": "reportId",
+      "value": "1"
+    },
+    {
+      "key": "contractorId",
+      "value": "1"
+    },
+    {
+      "key": "adminId",
+      "value": "1"
+    },
+    {
+      "key": "contractorEmail",
+      "value": "fixit@example.com"
+    },
+    {
+      "key": "contractorPassword",
+      "value": "pass123"
+    }
+  ],
+  "item": [
+    {
+      "name": "Public - Create Report",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "photo",
+              "type": "file",
+              "src": ""
+            },
+            {
+              "key": "latitude",
+              "value": "12.9716",
+              "type": "text"
+            },
+            {
+              "key": "longitude",
+              "value": "77.5946",
+              "type": "text"
+            },
+            {
+              "key": "description",
+              "value": "Large pothole near junction",
+              "type": "text"
+            },
+            {
+              "key": "reporterContact",
+              "value": "9876543210",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/reports",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "reports"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Public - Get Report",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/reports/{{reportId}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "reports",
+            "{{reportId}}"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Public - Tracking",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/reports/{{reportId}}/tracking",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "reports",
+            "{{reportId}}",
+            "tracking"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Public - Status History",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/reports/{{reportId}}/history",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "reports",
+            "{{reportId}}",
+            "history"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"pass123\",\n  \"zone\": \"SOUTH\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "login"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - List Reports",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Verify Report",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/{{reportId}}/verify",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "{{reportId}}",
+            "verify"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Assign Contractor",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"contractorId\": {{contractorId}},\n  \"estimatedCost\": 1500.0\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/{{reportId}}/assign",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "{{reportId}}",
+            "assign"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Update Status",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/{{reportId}}/update-status?status=IN_PROGRESS&actualCost=2000&notes=work-started",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "{{reportId}}",
+            "update-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "IN_PROGRESS"
+            },
+            {
+              "key": "actualCost",
+              "value": "2000"
+            },
+            {
+              "key": "notes",
+              "value": "work-started"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Update Priority",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/{{reportId}}/priority?priority=HIGH",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "{{reportId}}",
+            "priority"
+          ],
+          "query": [
+            {
+              "key": "priority",
+              "value": "HIGH"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Approve Report",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/{{reportId}}/approve",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "{{reportId}}",
+            "approve"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Nearby Reports",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/reports/nearby?lat=12.9716&lng=77.5946&radiusKm=2",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "reports",
+            "nearby"
+          ],
+          "query": [
+            {
+              "key": "lat",
+              "value": "12.9716"
+            },
+            {
+              "key": "lng",
+              "value": "77.5946"
+            },
+            {
+              "key": "radiusKm",
+              "value": "2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Admin - Set Admin Zone",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Admin-Username",
+            "value": "{{adminUser}}"
+          },
+          {
+            "key": "X-Admin-Password",
+            "value": "pass123"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"zone\": \"NORTH\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/admins/{{adminId}}/zone",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "admins",
+            "{{adminId}}",
+            "zone"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"FixIt Pvt Ltd\",\n  \"phone\": \"9999999999\",\n  \"email\": \"fixit@example.com\",\n  \"password\": \"pass123\",\n  \"available\": true\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/contractors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "contractors"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - List All",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/contractors",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "contractors"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - Available",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/admin/contractors/available",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "admin",
+            "contractors",
+            "available"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\\n  \\\"email\\\": \\\"{{contractorEmail}}\\\",\\n  \\\"password\\\": \\\"{{contractorPassword}}\\\"\\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contractor/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "contractor",
+            "login"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - My Reports",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "X-Contractor-Email",
+            "value": "{{contractorEmail}}"
+          },
+          {
+            "key": "X-Contractor-Password",
+            "value": "{{contractorPassword}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/contractor/reports",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "contractor",
+            "reports"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - Confirm Report",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "X-Contractor-Email",
+            "value": "{{contractorEmail}}"
+          },
+          {
+            "key": "X-Contractor-Password",
+            "value": "{{contractorPassword}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/contractor/reports/{{reportId}}/confirm",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "contractor",
+            "reports",
+            "{{reportId}}",
+            "confirm"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Contractor - Submit Repair",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Contractor-Email",
+            "value": "{{contractorEmail}}"
+          },
+          {
+            "key": "X-Contractor-Password",
+            "value": "{{contractorPassword}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "photo",
+              "type": "file",
+              "src": ""
+            },
+            {
+              "key": "notes",
+              "type": "text",
+              "value": "Repair completed"
+            },
+            {
+              "key": "actualCost",
+              "type": "text",
+              "value": "2000"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/contractor/reports/{{reportId}}/repair",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "contractor",
+            "reports",
+            "{{reportId}}",
+            "repair"
+          ]
+        }
+      }
+    }
+  ]
+}
